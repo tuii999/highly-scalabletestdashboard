@@ -1,13 +1,17 @@
-function maxProduct(nums) {
-  if (nums.length === 0) return 0;
-  let maxSoFar = nums[0];
-  let minSoFar = nums[0];
-  let maxProduct = nums[0];
-  for (let i = 1; i < nums.length; i++) {
-    const temp = maxSoFar;
-    maxSoFar = Math.max(nums[i], nums[i] * maxSoFar, nums[i] * minSoFar);
-    minSoFar = Math.min(nums[i], nums[i] * temp, nums[i] * minSoFar);
-    maxProduct = Math.max(maxProduct, maxSoFar);
+function partitionLabels(s) {
+  const last = new Array(26);
+  for (let i = 0; i < s.length; i++) {
+    last[s.charCodeAt(i) - "a".charCodeAt(0)] = i;
   }
-  return maxProduct;
+  let anchor = 0;
+  let j = 0;
+  const result = [];
+  for (let i = 0; i < s.length; i++) {
+    j = Math.max(j, last[s.charCodeAt(i) - "a".charCodeAt(0)]);
+    if (i === j) {
+      result.push(i - anchor + 1);
+      anchor = i + 1;
+    }
+  }
+  return result;
 }
