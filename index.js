@@ -1,3 +1,6 @@
-const numbers = [1, 5, 2, 8];
-const max = Math.max(...numbers);
-console.log(max); // 8
+function capitalizeWords(str) {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
